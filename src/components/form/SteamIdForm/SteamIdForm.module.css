@@ -1,0 +1,79 @@
+.steam-id-form {
+  margin-bottom: 1.5rem;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.form-text {
+  display: block;
+  margin-top: 0.25rem;
+  color: #6c757d;
+}
+
+.form-text a {
+  color: #0d6efd;
+  text-decoration: none;
+}
+
+.form-text a:hover {
+  text-decoration: underline;
+}
+
+.options-toggle {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+  background-color: transparent;
+  border: 1px solid #6c757d;
+  color: #6c757d;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  margin-bottom: 0.75rem;
+  transition: all 0.2s;
+}
+
+.options-toggle:hover {
+  background-color: #6c757d;
+  color: white;
+}
+
+.submit-button {
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  background-color: #0d6efd;
+  color: white;
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.submit-button:hover {
+  background-color: #0b5ed7;
+}
+
+.submit-button:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
