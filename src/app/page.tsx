@@ -8,36 +8,11 @@ import AlertMessage from '@/components/ui/AlertMessage';
 import type { Game, SteamGamesResponse } from '@/types/types';
 
 export default function Home() {
-  const apiKey = process.env.NEXT_PUBLIC_STEAM_API_KEY;
-  if (!apiKey) {
-    throw new Error('Steam API key is not set. Please set the NEXT_PUBLIC_STEAM_API_KEY environment variable.');
+  const proxyUrl = process.env.NEXT_PUBLIC_PROXY_URL;
+  if (!proxyUrl) {
+    throw new Error('Proxy URL is not set. Please set the NEXT_PUBLIC_PROXY_URL environment variable.');
   }
-  if (apiKey.length !== 32) {
-    throw new Error('Invalid Steam API key. Please check your key and try again.');
-  }
-  
-  const apiBaseUrl = process.env.NEXT_PUBLIC_STEAM_API_URL;
-  if (!apiBaseUrl) {
-    throw new Error('Steam API URL is not set. Please set the NEXT_PUBLIC_STEAM_API_URL environment variable.');
-  }
-  const apiInterface = process.env.NEXT_PUBLIC_STEAM_API_PLAYER_INTERFACE;
-  if (!apiInterface) {
-    throw new Error('Steam API interface is not set. Please set the NEXT_PUBLIC_STEAM_API_PLAYER_INTERFACE environment variable.');
-  }
-  const apiMethod = process.env.NEXT_PUBLIC_STEAM_API_PLAYER_METHOD;
-  if (!apiMethod) {
-    throw new Error('Steam API method is not set. Please set the NEXT_PUBLIC_STEAM_API_PLAYER_METHOD environment variable.');
-  }
-  const apiVersion = process.env.NEXT_PUBLIC_STEAM_API_PLAYER_VERSION;
-  if (!apiVersion) {
-    throw new Error('Steam API version is not set. Please set the NEXT_PUBLIC_STEAM_API_VERSION environment variable.');
-  }
-  const apiFormat = process.env.NEXT_PUBLIC_STEAM_API_FORMAT;
-  if (!apiFormat) {
-    throw new Error('Steam API format is not set. Please set the NEXT_PUBLIC_STEAM_API_FORMAT environment variable.');
-  }
-  const apiIncludeAppInfo = process.env.NEXT_PUBLIC_STEAM_API_INCLUDE_APP_INFO;
-  const apiIncludePlayedFreeGames = process.env.NEXT_PUBLIC_STEAM_API_INCLUDE_PLAYED_FREE_GAMES;
+
 
   const [steamId, setSteamId] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -53,16 +28,14 @@ export default function Home() {
     setGames([]);
 
     try {
-      const fullUrl = `${apiBaseUrl}/${apiInterface}/${apiMethod}/${apiVersion}/`;
-      const params = {
-        key: apiKey,
-        steamid: steamId,
-        format: apiFormat,
-        include_appinfo: apiIncludeAppInfo === 'TRUE',
-        include_played_free_games: apiIncludePlayedFreeGames === 'TRUE'
-      };
-
-      const response = await axios.get<SteamGamesResponse>(fullUrl, { params });
+      const response = await axios.get<SteamGamesResponse>(
+        proxyUrl,
+        {
+          params: {
+            steamid: steamId // Apenas o steamid é necessário agora
+          }
+        }
+      );
 
       if (!response.data.response?.games) {
         setError('Game list is not public. Please update your Steam privacy settings.');
